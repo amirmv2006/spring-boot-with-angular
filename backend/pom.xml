@@ -17,6 +17,8 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<testcontainers.version>1.14.3</testcontainers.version>
+		<it.skip>false</it.skip>
+		<ut.skip>false</ut.skip>
 	</properties>
 
 	<dependencies>
@@ -95,7 +97,58 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<skip>${it.skip}</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>${ut.skip}</skip>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>mavenSkipTests</id>
+			<activation>
+				<property>
+					<name>skipTests</name>
+				</property>
+			</activation>
+			<properties>
+				<it.skip>true</it.skip>
+				<ut.skip>true</ut.skip>
+			</properties>
+		</profile>
+		<profile>
+			<id>mavenSkipIntegrationTests</id>
+			<activation>
+				<property>
+					<name>skipIntegrationTests</name>
+				</property>
+			</activation>
+			<properties>
+				<it.skip>true</it.skip>
+			</properties>
+		</profile>
+		<profile>
+			<id>mavenSkipUnitTests</id>
+			<activation>
+				<property>
+					<name>skipUnitTests</name>
+				</property>
+			</activation>
+			<properties>
+				<ut.skip>true</ut.skip>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
