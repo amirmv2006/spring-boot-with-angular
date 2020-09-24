@@ -1,0 +1,19 @@
+server:
+  port: 8081
+okta:
+  oauth2:
+    issuer: https://dev-708628.okta.com/oauth2/default
+    clientId: 0oa11s3u2oVAYKMB44x7
+    redirect-uri: http://localhost:8080/login/callback
+    scopes:
+      - "openid"
+      - "profile"
+      - "email"
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          client: DEBUG
+backend:
+  frontend-url: ${env.FRONT_END_URL:http://localhost:8080}
