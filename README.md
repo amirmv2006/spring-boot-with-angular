@@ -8,7 +8,7 @@ and starts a docker container for [back-end on port 8081](http://localhost:8081)
 container for [front-end on port 8080](http://localhost:8081). Whenever you want to stop these
 containers just press "Ctrl+C".
 ```shell script
-docker-compose up
+docker-compose up --build
 ```
 ## Setting up the Continuous Integration
 Please Click [here](ci/README.md) to see how to set up Continuous Integration.   
